@@ -1,44 +1,35 @@
-palavra = "KENNEDY"
-letras_acertadas = ["_", "_", "_", "_", "_", "_", "_"]
+import random
+palavras = ["KENNEDY", "CAVALO", "VIKING", "PROPAROXITONA"]
+palavra = random.choice(palavras)
+
+letras_acertadas = []
+for letra in palavra:
+    letras_acertadas.append("_")
+
 acertou = False
 enforcou = False
-limite_tentativas = len(palavra) + 6
 tentativa = 1
-
-def mostrar_letras_acertadas():
+limite_tentativas = len(palavra) + 6
+def mostrarPalavra():
     for letra in letras_acertadas:
         print(letra, end=" ")
-
-print("Tente adivinhar a palavra secreta: ")
-while(not acertou and not enforcou):
-    # mostrar as letras acertadas
-    mostrar_letras_acertadas()
     print("")
-    chute = input("Digite uma letra: ")
+while(not acertou and not enforcou):
+    mostrarPalavra()
+    chute = input("Digite uma letra:")
     indice = 0
     for letra in palavra:
-        if chute.upper() == letra:
+        if (chute.upper() == letra):
             letras_acertadas[indice] = letra
         indice = indice + 1
-    
-    if tentativa == limite_tentativas:
-        print("Você perdeu :(\nA palavra era: ", palavra)
+
+    if (tentativa == limite_tentativas):
+        print("Você perdeu :(\nA palavra era:", palavra)
         enforcou = True
 
-    if letras_acertadas.count("_") == 0:
-        print("Parabéns, você acertou a palavra secreta!")
-        mostrar_letras_acertadas()
+    if (letras_acertadas.count("_") == 0):
+        print("Parabéns! Você descobriu a palavra!")
+        mostrarPalavra()
         acertou = True
 
     tentativa = tentativa + 1
-
-
-# TABELA VERDADE
-# Quero fazer um suco de banana OU maça
-# banana = true
-# maçã = true
-#   E       |       OU
-# v v = v   |     v v = v
-# V F = F   |     V F = V
-# F V = F   |     F V = V
-# F F = F   |     F F = F
